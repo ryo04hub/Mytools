@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/instafeed.min.js"></script>
+    <script type="text/javascript" src="js/jquery.simplyscroll.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    var feed = new Instafeed({
+        clientId: '1d89670a16864d3480fd02d5e03e2c6c',
+        get: 'user',
+        userId: '2538033102',
+        accessToken:'2538033102.1d89670.06d42af9b309449e8f367db254ae35ba',
+        links: true ,
+        limit: 8,// 取得件数
+        resolution:'standard_resolution', // thumbnail (default) - 150x150 | low_resolution - 306x306 | standard_resolution - 612x612
+        sortBy:'random',
+        template: '<li><a href="{{link}}"><img src="{{image}}" target="_blank"></a></li>',
+        after: function() {
+        $('#scroller ul').simplyScroll({
+          customClass: 'custom',
+    			pauseOnHover: true,
+    			frameRate: 50,
+          speed: 2
+        }); //Instafeed実行後、simplyScrollを実行して横スクロールさせる
+        },
+      });
+    feed.run();
+    });
+    </script>
+
+    <style type="text/css">
+    #instafeed{ margin-bottom:25px; }
+    .simply-scroll-container { position: relative; }
+    .simply-scroll-clip { position: relative; overflow: hidden; }
+    .simply-scroll-list { overflow: hidden; margin: 0; padding: 0; }
+    .simply-scroll-list li { float: left; padding: 0; margin: 0; width: 200px; height: 200px; list-style:none !important; }
+    .simply-scroll-list li img { display: block; }
+    .table table td{ vertical-align:top; }
+    </style>
+
+    <title>instagram scroll</title>
+  </head>
+  <body>
+    <div id="scroller">
+      <ul id="instafeed"></ul>
+    </div>
+  </body>
+</html>
